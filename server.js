@@ -31,10 +31,13 @@ app.get("/", (req, res) => {
 
 app.post("/create-order", async (req, res) => {
   const request = new paypal.orders.OrdersCreateRequest()
+  //get total amount charge 
   const total = req.body.items.reduce((sum, item) => {
     return sum + storeItems.get(item.id).price * item.quantity
   }, 0)
+  //set prefer
   request.prefer("return=representation")
+  //set request body format 
   request.requestBody({
     intent: "CAPTURE",
     purchase_units: [
@@ -49,6 +52,7 @@ app.post("/create-order", async (req, res) => {
             },
           },
         },
+        //iterate through each requested items 
         items: req.body.items.map(item => {
           const storeItem = storeItems.get(item.id)
           return {
@@ -65,6 +69,7 @@ app.post("/create-order", async (req, res) => {
   })
 
   try {
+    //send order
     const order = await paypalClient.execute(request)
     res.json({ id: order.result.id })
   } catch (e) {
