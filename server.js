@@ -2,15 +2,19 @@ require("dotenv").config()
 
 const express = require("express")
 const app = express()
+//use ejs as the frontend 
 app.set("view engine", "ejs")
+//set up the public folder for static file
 app.use(express.static("public"))
 app.use(express.json())
 
 const paypal = require("@paypal/checkout-server-sdk")
+//if production? then LIVE 
 const Environment =
   process.env.NODE_ENV === "production"
     ? paypal.core.LiveEnvironment
     : paypal.core.SandboxEnvironment
+//set up paypalClient with credentials 
 const paypalClient = new paypal.core.PayPalHttpClient(
   new Environment(
     process.env.PAYPAL_CLIENT_ID,
@@ -35,13 +39,15 @@ app.post("/create-order", async (req, res) => {
   const total = req.body.items.reduce((sum, item) => {
     return sum + storeItems.get(item.id).price * item.quantity
   }, 0)
-  //set prefer
+  //this is for the window that opens when user click 
   request.prefer("return=representation")
-  //set request body format 
+  //set parameters for Capture method 
   request.requestBody({
     intent: "CAPTURE",
     purchase_units: [
       {
+        //return amount and items details as below
+        //shows the total amount 
         amount: {
           currency_code: "USD",
           value: total,
@@ -52,7 +58,7 @@ app.post("/create-order", async (req, res) => {
             },
           },
         },
-        //iterate through each requested items 
+        //shows each item
         items: req.body.items.map(item => {
           const storeItem = storeItems.get(item.id)
           return {
