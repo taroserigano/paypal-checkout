@@ -18,6 +18,7 @@ paypal
       })
         .then(res => {
           if (res.ok) return res.json()
+        //because fetch doesn't return reject, you have to manually reject this way 
           return res.json().then(json => Promise.reject(json))
         })
         .then(({ id }) => {
@@ -28,6 +29,7 @@ paypal
         })
     },
     onApprove: function (data, actions) {
+      //capture is necessary in order to charge the user 
       return actions.order.capture()
     },
   })
