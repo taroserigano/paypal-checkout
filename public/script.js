@@ -21,6 +21,7 @@ paypal
         //because fetch doesn't return reject, you have to manually reject this way 
           return res.json().then(json => Promise.reject(json))
         })
+      //if successful, reutrn id 
         .then(({ id }) => {
           return id
         })
