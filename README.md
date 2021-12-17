@@ -19,3 +19,7 @@ npm run devStart
 ![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/4.jpg)
 
 ![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/5.jpg)
+
+*if you select Debit /  Credit Card option:
+
+![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/5.jpg)
