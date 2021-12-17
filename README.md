@@ -11,3 +11,11 @@ npm run devStart
 
 
 ![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/1.jpg)
+
+![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/2.jpg)
+
+![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/3.jpg)
+
+![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/4.jpg)
+
+![Alt text](https://github.com/taroserigano/paypal-checkout/blob/main/screenshots/5.jpg)
