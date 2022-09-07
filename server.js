@@ -41,7 +41,9 @@ app.post("/create-order", async (req, res) => {
   }, 0)
   //this is for the window that opens when user click 
   request.prefer("return=representation")
-  //set parameters for Capture method 
+  
+  // set parameters for Capture method 
+  // this whole request will be used for this transaction 
   request.requestBody({
     intent: "CAPTURE",
     purchase_units: [
@@ -55,10 +57,11 @@ app.post("/create-order", async (req, res) => {
             item_total: {
               currency_code: "USD",
               value: total,
+            // description can be added 
             },
           },
         },
-        //shows each item
+        // add all items for charge 
         items: req.body.items.map(item => {
           const storeItem = storeItems.get(item.id)
           return {
